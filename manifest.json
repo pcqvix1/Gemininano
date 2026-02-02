@@ -1,0 +1,8 @@
+{
+    "name": "Gemini Nano - IA Local",
+    "short_name": "Gemini Nano",
+    "start_url": "./",
+    "display": "standalone",
+    "background_color": "#2b2b2b",
+    "theme_color": "#2b2b2b"
+}

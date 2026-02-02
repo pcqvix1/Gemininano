@@ -442,4 +442,10 @@ class GeminiNanoApp {
 // Initialize app when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     window.app = new GeminiNanoApp();
+
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js').catch((error) => {
+            console.warn('Falha ao registrar o service worker:', error);
+        });
+    }
 });
