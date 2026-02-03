@@ -56,15 +56,12 @@ self.addEventListener('fetch', (event) => {
                 return cachedResponse;
             }
 
-            return fetch(request)
-                .then((response) => {
-                    const responseClone = response.clone();
+                        return fetch(request).then((response) => {
+                const responseClone = response.clone();
+                event.waitUntil(
                     caches.open(CACHE_NAME).then((cache) => {
                         cache.put(request, responseClone);
-                    });
-                    return response;
-                })
-                .catch(() => cachedResponse);
-        })
-    );
-});
+                    })
+                );
+                return response;
+            });
