@@ -35,6 +35,11 @@ self.addEventListener('fetch', (event) => {
         return;
     }
 
+    const requestUrl = new URL(request.url);
+    if (requestUrl.protocol !== 'http:' && requestUrl.protocol !== 'https:') {
+        return;
+    }
+
     if (request.mode === 'navigate') {
         event.respondWith(
             fetch(request)
@@ -56,7 +61,7 @@ self.addEventListener('fetch', (event) => {
                 return cachedResponse;
             }
 
-                        return fetch(request).then((response) => {
+            return fetch(request).then((response) => {
                 const responseClone = response.clone();
                 event.waitUntil(
                     caches.open(CACHE_NAME).then((cache) => {
@@ -65,3 +70,6 @@ self.addEventListener('fetch', (event) => {
                 );
                 return response;
             });
+        })
+    );
+});
